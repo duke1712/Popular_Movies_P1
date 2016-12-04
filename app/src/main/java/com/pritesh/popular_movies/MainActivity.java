@@ -48,19 +48,9 @@ public class MainActivity extends AppCompatActivity {
         mProg=new ProgressDialog(this,ProgressDialog.STYLE_SPINNER);
         spinner=(Spinner)findViewById(R.id.spinner);
         movies=(GridView)findViewById(R.id.movies);
-  //      mov.doInBackground(Constants.BASE_URL+Constants.POPULAR_URL+Constants.API_KEY);
-
         ArrayAdapter<CharSequence> arrayAdapter=ArrayAdapter.createFromResource(this,R.array.filter, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-//        try {
-//  //          update("Popular");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -73,22 +63,13 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
-
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
-
-
        image=new ImageAdapter(arrayList,this);
         movies.setAdapter(image);
-
-
     }
-
     private void update(String sort) throws IOException, JSONException {
         String url=Constants.BASE_URL;
         arrayList.clear();
@@ -98,12 +79,10 @@ public class MainActivity extends AppCompatActivity {
         url+=Constants.RATED_URL+Constants.API_KEY;
         new getmovie().execute(url);
    }
-
     String doGetRequest(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
@@ -119,10 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     String img_url = movie.getString("poster_path");
                     img_url = img_url.substring(1);
                     arrayList.add(Constants.IMAGE_BASE_URL + img_url +"?"+ Constants.API_KEY);
-
                 }
-
-
             }
             catch (Exception e)
             {
@@ -130,13 +106,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-
         @Override
         protected void onPreExecute() {
 
             mProg.show();
         }
-
         @Override
         protected void onPostExecute(Long aLong) {
             mProg.cancel();

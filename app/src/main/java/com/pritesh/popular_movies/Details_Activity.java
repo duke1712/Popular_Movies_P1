@@ -46,8 +46,8 @@ public class Details_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_);
         intent=getIntent();
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         position=intent.getIntExtra("POSITION",0);
         movieName=(TextView)findViewById(R.id.movieName);
         date=(TextView)findViewById(R.id.releaseDate);
